@@ -9,6 +9,19 @@
 
 <script setup lang="ts">
 // 逻辑层代码
+uni.request({
+  url: 'http://localhost:8080/test', //仅为示例，并非真实接口地址。
+  data: {
+    text: 'uni.request'
+  },
+  header: {
+    'custom-header': 'hello' //自定义请求头信息
+  },
+  success: (res) => {
+    console.log("坎坎坷坷",res.data);
+    this.text = 'request success';
+  }
+});
 </script>
 
 <style scoped>
