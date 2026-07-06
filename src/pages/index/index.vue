@@ -2,24 +2,26 @@
   <view class="container">
     <view class="header">首页</view>
     <view class="content">
-      <text>欢迎来到移动商城首页！</text>
+      <text>欢迎来到移动商城首页11！{{title}}</text>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
+import {ref} from 'vue'
+const title=ref('')
 // 逻辑层代码
 uni.request({
-  url: 'http://localhost:8080/test', //仅为示例，并非真实接口地址。
+  url: 'https://lyt.juntaitec.cn/test',
   data: {
     text: 'uni.request'
   },
-  header: {
-    'custom-header': 'hello' //自定义请求头信息
-  },
+  // header: {
+  //   'custom-header': 'hello' //自定义请求头信息
+  // },
   success: (res) => {
     console.log("坎坎坷坷",res.data);
-    this.text = 'request success';
+    title.value = res.data;
   }
 });
 </script>
