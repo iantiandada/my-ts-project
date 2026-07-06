@@ -9,21 +9,24 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-
-const title = ref('加载中...')
+const title = ref('')
 
 uni.request({
   url: 'https://lyt.juntaitec.cn/test',
   method: 'GET',
-  timeout: 10000,   // 10 秒超时（可按需调整）
+  timeout: 10000,
   success: (res) => {
-    console.log('请求成功', res.data)
     title.value = res.data as string
   },
   fail: (err) => {
     console.error('请求失败', err)
+    // 显示完整错误对象
+    uni.showModal({
+      title: '请求失败',
+      content: JSON.stringify(err),
+      showCancel: false
+    })
     title.value = '网络请求失败'
-    uni.showToast({ title: '请求超时，请检查网络', icon: 'none' })
   }
 })
 </script>
